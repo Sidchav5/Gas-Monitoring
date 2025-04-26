@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <title>Safety Helmet Monitoring System</title>
+</head>
+<body>
+    <nav>
+        <div class="heading">
+            <h1>Gas Chambers Monitoring System</h1>
+        </div>
+        <div class="inner_nav">
+            <ul>
+                <li><button><a href="info.html">User Manual</a></button></li>
+                <li class="dropdown">
+                    <button class="dropbtn">Filter by Temperature C</button>
+                    <div class="dropdown-content">
+                        <a href="#">30</a>
+                        <a href="#">40</a>
+                        <a href="#">50</a>
+                        <a href="#">60</a>
+                        <a href="#">65</a>
+                        <a href="#">70</a>
+                        <a href="#">75</a>
+                        <a href="#">80</a>
+                        <a href="#">85</a>
+                        <a href="#">90</a>
+                        <a href="#">100</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button class="dropbtn">Filter by MQ9 Reading</button>
+                    <div class="dropdown-content">
+                        <a href="#">5</a>
+                        <a href="#">10</a>
+                        <a href="#">15</a>
+                        <a href="#">20</a>
+                        <a href="#">25</a>
+                        <a href="#">30</a>
+                        <a href="#">35</a>
+                        <a href="#">40</a>
+                        <a href="#">45</a>
+                        <a href="#">50</a>
+                        <a href="#">55</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button class="dropbtn">Filter by MQ135 Reading</button>
+                    <div class="dropdown-content">
+                        <a href="#">200</a>
+                        <a href="#">250</a>
+                        <a href="#">300</a>
+                        <a href="#">350</a>
+                        <a href="#">400</a>
+                        <a href="#">450</a>
+                        <a href="#">500</a>
+                        <a href="#">550</a>
+                        <a href="#">600</a>
+                        <a href="#">650</a>
+                        <a href="#">700</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <button class="dropbtn">Filter by MQ2 Reading</button>
+                    <div class="dropdown-content">
+                        <a href="#">20</a>
+                        <a href="#">40</a>
+                        <a href="#">80</a>
+                        <a href="#">100</a> 
+                        <a href="#">150</a>
+                        <a href="#">200</a>
+                        <a href="#">250</a>
+                        <a href="#">300</a>
+                        <a href="#">350</a>
+                        <a href="#">400</a>
+                        <a href="#">450</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+ <!-- Alert container for displaying alerts -->
+<div id="alert-container"></div>
+
+
+    <div class="sensor-flex-container">
+        <div class="worker-box" id="realSensorBox">
+            <h2>Chamber 1</h2>
+            <p>Humidity: <span id="realHumidity"></span></p>
+            <p>MQ135 Level: <span class="co2-level" id="realMQ135"></span></p>
+            <p>MQ2 Level: <span id="realMQ2"></span></p>
+            <p>MQ9 Level: <span id="realMQ9"></span></p>
+            <p>Temperature C: <span id="realTemperatureC"></span></p>
+            <p>Temperature F: <span id="realTemperatureF"></span></p>
+            <!-- <p>Distance: <span id="realDistance"></span></p> -->
+        </div>
+
+        <div class="worker-box" id="dummySensorBox1">
+            <h2>Chamber 2</h2>
+            <p>Humidity: <span id="dummyHumidity1"></span></p>
+            <p>MQ135 Level: <span class="co2-level" id="dummyMQ1351"></span></p>
+            <p>MQ2 Level: <span id="dummyMQ21"></span> </p>
+            <p>MQ9 Level: <span id="dummyMQ91"></span> </p>
+            <p>Temperature C: <span id="dummyTemperatureC1"></span> </p>
+            <p>Temperature F: <span id="dummyTemperatureF1"></span> </p>
+            <!-- <p>Distance D: <span id="dummyDistance2"></span> </p> -->
+
+        </div>
+
+        <div class="worker-box" id="dummySensorBox2">
+            <h2>Chamber 3</h2>
+            <p>Humidity: <span id="dummyHumidity2"></span> </p>
+            <p>MQ135 Level: <span class="co2-level" id="dummyMQ1352"></span></p>
+            <p>MQ2 Level: <span id="dummyMQ22"></span> </p>
+            <p>MQ9 Level: <span id="dummyMQ92"></span> </p>
+            <p>Temperature C: <span id="dummyTemperatureC2"></span> </p>
+            <p>Temperature F: <span id="dummyTemperatureF2"></span></p>
+            <!-- <p>Distance : <span id="dummyDistance3"></span> </p> -->
+        </div>
+    </div>
+
+    <div class="sensor-flex-container">
+        <div class="worker-box" id="dummySensorBox3">
+            <h2>Chamber 4</h2>
+            <p>Humidity: <span id="dummyHumidity3"></span></p>
+            <p>MQ135 Level: <span class="co2-level" id="dummyMQ1353"></span> </p>
+            <p>MQ2 Level: <span id="dummyMQ23"></span> </p>
+            <p>MQ9 Level: <span id="dummyMQ93"></span> </p>
+            <p>Temperature C: <span id="dummyTemperatureC3"></span> </p>
+            <p>Temperature F: <span id="dummyTemperatureF3"></span> </p>
+            <!-- <p>Distance : <span id="dummyDistance3"></span> </p> -->
+        </div>
+
+        <div class="worker-box" id="dummySensorBox4">
+            <h2>Chamber 5</h2>
+            <p>Humidity: <span id="dummyHumidity4"></span></p>
+            <p>MQ135 Level: <span class="co2-level" id="dummyMQ1354"></span> </p>
+            <p>MQ2 Level: <span id="dummyMQ24"></span> </p>
+            <p>MQ9 Level: <span id="dummyMQ94"></span> </p>
+            <p>Temperature C: <span id="dummyTemperatureC4"></span> </p>
+            <p>Temperature F: <span id="dummyTemperatureF4"></span> </p>
+            <!-- <p>Distance : <span id="dummyDistance4"></span> </p> -->
+        </div>
+
+        <div class="worker-box" id="dummySensorBox5">
+            <h2>Chamber 6</h2>
+            <p>Humidity: <span id="dummyHumidity5"></span></p>
+            <p>MQ135 Level: <span class="co2-level" id="dummyMQ1355"></span> </p>
+            <p>MQ2 Level: <span id="dummyMQ25"></span> </p>
+            <p>MQ9 Level: <span id="dummyMQ95"></span> </p>
+            <p>Temperature C: <span id="dummyTemperatureC5"></span> </p>
+            <p>Temperature F: <span id="dummyTemperatureF5"></span> </p>
+            <!-- <p>Distance : <span id="dummyDistance5"></span> </p> -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="box_footer">
+            <div>
+                <h2>Project By AI&DS A Group No: 1 </h2>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/your-instagram-handle" target="_blank"><img src="Insta.jpg" alt="Instagram"></a>
+                <a href="https://www.facebook.com/your-facebook-handle" target="_blank"><img src="Facebook.jpg" alt="Facebook"></a>
+                <a href="https://www.twitter.com/your-twitter-handle" target="_blank"><img src="Twitter.jpg" alt="Twitter"></a>
+                <a href="https://www.linkedin.com/feed/"><img src="LinkedIn.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script src="script.js"></script>
+</html>
